@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "QCUTrVfVGLejV6dFocG5Io+gGiI+2H3W6sp8TFqjNhM=",
+  "Source": "MotelBookingApi",
+  "BasePath": "_content/MotelBookingApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,56 @@
+services:
+  # API service configuration
+  motelbooking.api:
+    container_name: motelbooking.api  # Name of the container
+    build: .                         # Build from Dockerfile in current directory
+    ports:
+      - "8081:80"                   # Map host port 8081 to container port 80
+    depends_on:
+      - db                          # Ensure database starts first
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development           # Set development environment
+      - ASPNETCORE_URLS=http://+:80                 # Configure API to listen on port 80
+      # Database connection string with container hostname
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=MotelBookingDb;Username=myUser;Password=myPassword
+    networks:
+      - app_network                 # Connect to custom network
+    restart: unless-stopped         # Restart policy
+
+  # PostgreSQL database service
+  db:
+    container_name: motelbooking.db # Name of the database container
+    image: postgres:15             # Use PostgreSQL 15 image
+    restart: unless-stopped        # Restart policy
+    environment:
+      POSTGRES_DB: MotelBookingDb  # Database name
+      POSTGRES_USER: myUser        # Database user
+      POSTGRES_PASSWORD: myPassword # Database password
+    volumes:
+      # Persist database data
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"               # Expose PostgreSQL port
+    networks:
+      - app_network               # Connect to custom network
+    command: ["postgres", "-c", "shared_preload_libraries=pgcrypto"]  # Enable pgcrypto extension
+
+  # Database management UI
+  adminer:
+    container_name: adminer       # Name of the Adminer container
+    image: adminer:latest        # Use latest Adminer image
+    restart: unless-stopped      # Restart policy
+    depends_on:
+      - db                      # Ensure database starts first
+    ports:
+      - "8082:8080"            # Map host port 8082 to container port 8080
+    networks:
+      - app_network            # Connect to custom network
+
+# Named volumes for persistent data
+volumes:
+  postgres_data:               # Volume for PostgreSQL data
+
+# Custom network configuration
+networks:
+  app_network:                # Define custom network
+    driver: bridge           # Use bridge network driver
