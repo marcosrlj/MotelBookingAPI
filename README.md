@@ -1,4 +1,7 @@
 # MotelBooking API
+## 🎥 Demonstração do Projeto
+
+Assista ao vídeo explicativo: [Clique aqui](https://www.youtube.com/watch?v=IeGipsYI3gw)
 
 ## Objetivo do Projeto
 Desenvolvimento de uma API RESTful completa para gerenciamento de motéis, quartos, reservas e usuários. A API implementa autenticação JWT, otimização de queries SQL e uso eficiente de cache, com foco em segurança, performance e uma arquitetura escalável.
