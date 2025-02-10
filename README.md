@@ -44,97 +44,105 @@ MotelBookingAPI/
  ┣ docker-compose.yml
  ┣ Dockerfile
  ┗ README.md
-Como Executar
-Pré-requisitos
-Docker & Docker Compose
-.NET SDK 8 (opcional)
-PostgreSQL (opcional)
-Usando Docker (Recomendado)
-Clone o repositório:
-bash
-Copiar
-Editar
+```
+
+## Como Executar
+
+### Pré-requisitos
+- Docker & Docker Compose
+- .NET SDK 8 (opcional)
+- PostgreSQL (opcional)
+
+### Usando Docker (Recomendado)
+
+1. Clone o repositório:
+
+```bash
 git clone https://github.com/seu-usuario/motelbooking-api.git
 cd motelbooking-api
-Configure o ambiente criando um arquivo .env na raiz do projeto:
-ini
-Copiar
-Editar
+```
+
+2. Configure o ambiente criando um arquivo ```.env``` na raiz do projeto:
+
+```bash
 POSTGRES_DB=MotelBookingDb
 POSTGRES_USER=myUser
 POSTGRES_PASSWORD=myPassword
 JWT_KEY=segredo_super_secreto
 JWT_ISSUER=motelbooking
 JWT_AUDIENCE=motelbooking_users
-Execute com Docker Compose:
-bash
-Copiar
-Editar
-docker-compose up --build -d
-Usando Localmente (Sem Docker)
-Configure o Banco de Dados:
-Se estiver usando PostgreSQL local, crie um banco de dados conforme definido nas variáveis de ambiente.
-Execute as Migrations:
-bash
-Copiar
-Editar
+```
+
+3. Execute com Docker Compose:
+
+```
+docker-compose up --build -d```
+```
+
+### Usando Localmente (Sem Docker)
+
+1. Configure o Banco de Dados:
+- Se estiver usando PostgreSQL local, crie um banco de dados conforme definido nas variáveis de ambiente.
+2. Execute as Migrations:
+
+```
 dotnet ef database update
-Inicie a Aplicação:
-bash
-Copiar
-Editar
+```
+
+3. Inicie a Aplicação:
+
+```
 dotnet run
+```
+
 A API estará disponível em http://localhost:5000 ou http://localhost:8081, dependendo da configuração.
 
-Endpoints Principais
-Faturamento
-GET /api/Faturamento/mensal - Obtém o faturamento mensal
-Motéis
-POST /api/Moteis/adicionar - Adiciona um novo motel
-PUT /api/Moteis/editar/{id} - Edita os dados de um motel
-DELETE /api/Moteis/excluir/{id} - Exclui um motel
-GET /api/Moteis/listar - Lista todos os motéis
-Quartos
-POST /api/Quartos/adicionar - Adiciona um novo quarto
-GET /api/Quartos/obter/{id} - Obtém os detalhes de um quarto
-PUT /api/Quartos/editar/{id} - Edita os dados de um quarto
-DELETE /api/Quartos/excluir/{id} - Exclui um quarto
-GET /api/Quartos/listar - Lista todos os quartos
-Reservas
-POST /api/Reservas/adicionar - Adiciona uma nova reserva
-GET /api/Reservas/listar - Lista todas as reservas
-GET /api/Reservas/mensal - Obtém todas as reservas do mês
-GET /api/Reservas/{id} - Obtém os detalhes de uma reserva específica
-Usuários
-POST /api/Usuarios/login - Login do usuário (gera token JWT)
-POST /api/Usuarios/adicionar - Adiciona um novo usuário
-PUT /api/Usuarios/editar/{id} - Edita os dados de um usuário
-DELETE /api/Usuarios/excluir/{id} - Exclui um usuário
-GET /api/Usuarios/listar - Lista todos os usuários
-GET /api/Usuarios/perfil - Obtém o perfil do usuário autenticado
-Segurança
-JWT para autenticação
-Proteção contra SQL Injection
-Validação de dados
-Cache otimizado
-HTTPS
-Performance
-Cache em memória para consultas frequentes
-Eager Loading otimizado
-Queries parametrizadas
-Índices no banco de dados
-Melhorias Futuras
- Cache distribuído com Redis
- Testes de integração
- Logging avançado
- Frontend em React
- CI/CD completo
-Licença
-MIT
+## Endpoints Principais
 
-Autor
+| Recurso      | Método  | Endpoint                            | Descrição                                      |
+|--------------|---------|-------------------------------------|------------------------------------------------|
+| **Faturamento** | **GET** | `/api/Faturamento/mensal`          | Obtém o faturamento mensal                     |
+| **Motéis**      | **POST** | `/api/Moteis/adicionar`            | Adiciona um novo motel                        |
+|              | **PUT**  | `/api/Moteis/editar/{id}`          | Edita os dados de um motel                    |
+|              | **DELETE** | `/api/Moteis/excluir/{id}`        | Exclui um motel                               |
+|              | **GET**  | `/api/Moteis/listar`               | Lista todos os motéis                         |
+| **Quartos**     | **POST** | `/api/Quartos/adicionar`           | Adiciona um novo quarto                       |
+|              | **GET**  | `/api/Quartos/obter/{id}`          | Obtém os detalhes de um quarto                |
+|              | **PUT**  | `/api/Quartos/editar/{id}`         | Edita os dados de um quarto                   |
+|              | **DELETE** | `/api/Quartos/excluir/{id}`       | Exclui um quarto                              |
+|              | **GET**  | `/api/Quartos/listar`              | Lista todos os quartos                        |
+| **Reservas**    | **POST** | `/api/Reservas/adicionar`          | Adiciona uma nova reserva                     |
+|              | **GET**  | `/api/Reservas/listar`             | Lista todas as reservas                       |
+|              | **GET**  | `/api/Reservas/mensal`             | Obtém todas as reservas do mês                |
+|              | **GET**  | `/api/Reservas/{id}`               | Obtém os detalhes de uma reserva específica   |
+| **Usuários**    | **POST** | `/api/Usuarios/login`              | Login do usuário (gera token JWT)             |
+|              | **POST** | `/api/Usuarios/adicionar`          | Adiciona um novo usuário                      |
+|              | **PUT**  | `/api/Usuarios/editar/{id}`        | Edita os dados de um usuário                  |
+|              | **DELETE** | `/api/Usuarios/excluir/{id}`      | Exclui um usuário                             |
+|              | **GET**  | `/api/Usuarios/listar`             | Lista todos os usuários                       |
+|              | **GET**  | `/api/Usuarios/perfil`             | Obtém o perfil do usuário autenticado         |
+
+### Segurança
+- JWT para autenticação
+- Proteção contra SQL Injection
+- Validação de dados
+- Cache otimizado
+
+
+### Performance
+- Cache em memória para consultas frequentes
+- Eager Loading otimizado
+- Queries parametrizadas
+- Índices no banco de dados
+
+### Melhorias Futuras
+- Cache distribuído com Redis
+- Testes de integração
+- Logging avançado
+- Frontend em React
+- CI/CD completo
+
+#### Autor
 Marcos Roberto Longhi Junior
-📧 marcosrlj@hotmail.com
 
-Dúvidas? Consulte a documentação gerada pelo Swagger em http://localhost:8081/swagger/index.html.
-Ou entre em contato via e-mail ou crie issues no repositório.
+**📧 marcosrlj@hotmail.com**
