@@ -76,7 +76,7 @@ JWT_AUDIENCE=motelbooking_users
 3. Execute com Docker Compose:
 
 ```
-docker-compose up --build -d```
+docker-compose up --build -d
 ```
 
 ### Usando Localmente (Sem Docker)
